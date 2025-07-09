@@ -49,3 +49,5 @@ module "route53" {
   alias_target_dns_name = module.alb.alb_dns_name
   alias_target_zone_id  = module.alb.alb_zone_id
 }
+
+
