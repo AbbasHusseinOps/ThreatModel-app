@@ -34,7 +34,7 @@ jobs:
           docker push $IMAGE_URI
 
       - name: Scan image
-        uses: aquasecurity/trivy-action@v0
+        uses: aquasecurity/trivy-action@v0.32.0
         with:
           image-ref: $IMAGE_URI
           exit-code: '1'
