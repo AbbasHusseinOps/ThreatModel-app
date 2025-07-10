@@ -26,7 +26,8 @@ jobs:
         run: aws sts get-caller-identity
       - name: Login to ECR
         uses: aws-actions/amazon-ecr-login@v1
-
+        with: 
+         mask-authorisation-token= true
       - name: Build & Push image
         run: |
           IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/abbas-app-repo:latest
