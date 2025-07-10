@@ -2,11 +2,9 @@ name: "Abbas ECS-TMAPP"
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch: {}
 
 jobs:
@@ -22,24 +20,31 @@ jobs:
           aws-access-key-id:     ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region:            eu-west-2
+
       - name: Verify AWS Identity
         run: aws sts get-caller-identity
+
       - name: Login to ECR
-        uses: aws-actions/amazon-ecr-login@v1
-        with: 
-         mask-authorisation-token= true
+        env:
+          AWS_REGION:    eu-west-2
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        run: |
+          aws ecr get-login-password --region $AWS_REGION \
+            | docker login \
+                --username AWS \
+                --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+
       - name: Build & Push image
         run: |
           IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/abbas-app-repo:latest
           docker build -t $IMAGE_URI .
-          docker push $IMAGE_URI
-       
-          - name: Scan image
-          uses: aquasecurity/trivy-action@v0.32.0
-          with:
-            image-ref: $IMAGE_URI
-            exit-code: '1'
-            vuln-type: 'os,library'
-            format: table
-            version: '0.64.1'       
-        
+          docker push   $IMAGE_URI
+
+      - name: Scan image
+        uses: aquasecurity/trivy-action@v0.32.0
+        with:
+          image-ref: $IMAGE_URI
+          exit-code: '1'
+          vuln-type: 'os,library'
+          format: table
+          version: '0.64.1'
