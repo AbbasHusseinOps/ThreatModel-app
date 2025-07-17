@@ -39,7 +39,7 @@ jobs:
 
       - name: Save Reports
         working-directory: terraform
-        run: checkov -d . --quiet --output junitxml --skip-check ALL > checkov-report.xml
+        run: checkov -d . --quiet --output junitxml --skip-check ALL > checkov-report.xml || true
 
       - name: Upload Reports
         uses: actions/upload-artifact@v4
