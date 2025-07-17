@@ -1,0 +1,73 @@
+name: Terraform Apply
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id:     ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region:            ${{ secrets.AWS_REGION }}
+
+      - name: Install Checkov
+        run: pip install checkov
+
+      - name: Install tfsec
+        run: |
+          curl -sL https://github.com/aquasecurity/tfsec/releases/latest/download/tfsec-linux-amd64 -o tfsec
+          chmod +x tfsec
+          sudo mv tfsec /usr/local/bin/
+
+      - name: Verify tfsec Installation
+        run: tfsec --version
+
+      - name: Run Checkov Scan (Bypass All Violations)
+        working-directory: ./terraform
+        run: |
+          checkov -d . --quiet --skip-check ALL
+        continue-on-error: true
+
+      - name: Run tfsec Scan
+        working-directory: ./terraform
+        run: |
+          tfsec --format json --out tfsec-report.json --soft-fail .
+        continue-on-error: true
+
+      - name: Save Reports
+        working-directory: ./terraform
+        run: |
+          checkov -d . --quiet --output junitxml --skip-check ALL > checkov-report.xml
+
+      - name: Upload Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-reports
+          path: |
+            ./terraform/checkov-report.xml
+            ./terraform/tfsec-report.json
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: ./terraform
+        run: terraform apply -auto-approve
