@@ -1,15 +1,14 @@
-name: Build and Push to Amazon ECR
+name: Build, Scan & Push to Amazon ECR
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   build-and-push:
-    name: Build and Push Docker Image to ECR
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -23,20 +22,25 @@ jobs:
 
       - name: Log in to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build Docker Image
+      - name: Build & Tag Docker Image
         run: |
-          docker build -t abbas-app:latest .
-          docker tag abbas-app:latest ${{ steps.login-ecr.outputs.registry }}/abbas-app:latest
+          REPO=abbas-app
+          TAG=latest
+          REGISTRY=${{ steps.login-ecr.outputs.registry }}
+          IMAGE_URI=$REGISTRY/$REPO:$TAG
+          docker build -t $IMAGE_URI .
+          docker tag    $IMAGE_URI $IMAGE_URI
 
       - name: Scan with Trivy Action
-        uses: aquasecurity/trivy-action@v0
+        uses: aquasecurity/trivy-action@0.32.0
         with:
-          image-ref: ${{ steps.login-ecr.outputs.registry }}/abbas-app:latest
-          format: table
-          exit-code: '1'
-          severity: CRITICAL
+          image-ref:   ${{ steps.login-ecr.outputs.registry }}/abbas-app:latest
+          format:      table
+          exit-code:   '1'
+          severity:    CRITICAL
 
       - name: Push Docker Image
-        run: docker push ${{ steps.login-ecr.outputs.registry }}/abbas-app:latest
+        run: |
+          docker push ${{ steps.login-ecr.outputs.registry }}/abbas-app:latest
