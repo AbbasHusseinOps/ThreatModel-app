@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
@@ -27,7 +27,8 @@ jobs:
 
       - name: Install tfsec
         run: |
-          curl -sL https://github.com/aquasecurity/tfsec/releases/latest/download/tfsec-linux-amd64 -o tfsec
+          curl -sL https://github.com/aquasecurity/tfsec/releases/latest/download/tfsec-linux-amd64 \
+            -o tfsec
           chmod +x tfsec
           sudo mv tfsec /usr/local/bin/
 
@@ -36,23 +37,20 @@ jobs:
 
       - name: Run Checkov Scan (Bypass All Violations)
         working-directory: ./terraform
-        run: |
-          checkov -d . --quiet --skip-check ALL
+        run: checkov -d . --quiet --skip-check ALL
         continue-on-error: true
 
       - name: Run tfsec Scan
         working-directory: ./terraform
-        run: |
-          tfsec --format json --out tfsec-report.json --soft-fail .
+        run: tfsec --format json --out tfsec-report.json --soft-fail .
         continue-on-error: true
 
       - name: Save Reports
         working-directory: ./terraform
-        run: |
-          checkov -d . --quiet --output junitxml --skip-check ALL > checkov-report.xml
+        run: checkov -d . --quiet --output junitxml --skip-check ALL > checkov-report.xml
 
       - name: Upload Reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: security-reports
           path: |
