@@ -36,17 +36,17 @@ jobs:
         run: tfsec --version
 
       - name: Run Checkov Scan (Bypass All Violations)
-        working-directory: ./terraform
+        working-directory: ./escthreatmodel
         run: checkov -d . --quiet --skip-check ALL
         continue-on-error: true
 
       - name: Run tfsec Scan
-        working-directory: ./terraform
+        working-directory: ./escthreatmodel
         run: tfsec --format json --out tfsec-report.json --soft-fail .
         continue-on-error: true
 
       - name: Save Reports
-        working-directory: ./terraform
+        working-directory: ./escthreatmodel
         run: checkov -d . --quiet --output junitxml --skip-check ALL > checkov-report.xml
 
       - name: Upload Reports
@@ -54,8 +54,8 @@ jobs:
         with:
           name: security-reports
           path: |
-            ./terraform/checkov-report.xml
-            ./terraform/tfsec-report.json
+            ./escthreatmodel/checkov-report.xml
+            ./escthreatmodel/tfsec-report.json
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
@@ -63,9 +63,9 @@ jobs:
           terraform_version: 1.5.7
 
       - name: Terraform Init
-        working-directory: ./terraform
+        working-directory: ./escthreatmodel
         run: terraform init
 
       - name: Terraform Apply
-        working-directory: ./terraform
+        working-directory: ./escthreatmodel
         run: terraform apply -auto-approve
