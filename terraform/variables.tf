@@ -14,7 +14,7 @@ variable "name_prefix" {
 }
 
 variable "acm_certificate_arn" {
-  type = string
+  type    = string
   default = "arn:aws:acm:eu-west-2:885073318616:certificate/32bff016-bf41-4c0f-b5d4-68d10dba4d34"
 }
 

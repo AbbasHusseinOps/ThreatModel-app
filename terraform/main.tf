@@ -27,25 +27,25 @@ module "alb" {
   allowed_cidr_blocks = var.allowed_cidr_blocks
 }
 module "ecs" {
-   source             = "./modules/ecs"
-   name_prefix        = var.name_prefix
-   subnet_ids         = module.networking.subnet_ids
-   security_group_id  = module.alb.security_group_id
-   target_group_arn   = module.alb.target_group_arn
-   listener_arn       = module.alb.https_listener_arn
-   container_image    = "885073318616.dkr.ecr.eu-west-2.amazonaws.com/abbas-app-repo:latest"
-   container_port     = 3000
- }
+  source            = "./modules/ecs"
+  name_prefix       = var.name_prefix
+  subnet_ids        = module.networking.subnet_ids
+  security_group_id = module.alb.security_group_id
+  target_group_arn  = module.alb.target_group_arn
+  listener_arn      = module.alb.https_listener_arn
+  container_image   = "885073318616.dkr.ecr.eu-west-2.amazonaws.com/abbas-app-repo:latest"
+  container_port    = 3000
+}
 
 module "s3" {
-  source        = "./modules/s3"
-  
+  source = "./modules/s3"
+
 }
 
 module "route53" {
   source                = "./modules/route53"
-  zone_name             = var.route53_zone_name        
-  record_name           = ""                           
+  zone_name             = var.route53_zone_name
+  record_name           = ""
   alias_target_dns_name = module.alb.alb_dns_name
   alias_target_zone_id  = module.alb.alb_zone_id
 }
