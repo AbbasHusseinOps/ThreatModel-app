@@ -1,4 +1,4 @@
-# AWS ECS Threat Modeling Tool
+# Containerised Threat Modeling Tool App On AWS
 
 <p align="center">
   <img src="media/demo.gif" alt="App demo" width="80%" />
