@@ -26,3 +26,35 @@
  CI/CD Automation GitHub Actions handle the end-to-end workflow: building your Docker image, running tests, applying Terraform changes, and rolling out updates to Fargate—no manual AWS Console steps required.
 
 
+## Project Structure
+
+./
+├── app/
+├── Dockerfile
+├── terraform/
+│ ├── main.tf
+│ ├── provider.tf
+│ ├── variables.tf
+│ └── modules/
+│      ├── alb/
+│      ├── ecs/
+│      ├── iam/
+│      ├── route53/
+│      ├── networking/
+│      ├──vpc/
+├── .github/
+│     └── workflows/
+│            ├── build.yml
+│            ├── terraformapply.yml
+│            ├── terraformdestroy.yml
+│            
+├── media/
+│ ├── demo.gif
+│ ├── demo.mov
+│ └── palette.png
+├── .gitignore
+├── .terraform.lock.hcl
+└── README.md
+
+
+
