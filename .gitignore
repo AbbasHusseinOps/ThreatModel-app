@@ -12,3 +12,8 @@ dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+terraform/modules/
+demo.gif
+demo.mov
+palette.png
+terraform/destroy.plan

@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 # Containerised Threat Modeling Tool App on AWS
+=======
+# AWS ECS Threat Modeling Tool
+>>>>>>> Stashed changes
 
 <p align="center">
   <img src="media/demo.gif" alt="App demo" width="80%" />
@@ -8,6 +12,7 @@
 
 ## Tools & Technologies
 
+<<<<<<< Updated upstream
 [![AWS ECS](https://img.shields.io/badge/AWS-ECS-232F3E?logo=amazonaws)](https://aws.amazon.com/ecs/)  
 [![Terraform](https://img.shields.io/badge/Terraform-v1.5-623CE4?logo=terraform)](https://www.terraform.io/)  
 [![Docker](https://img.shields.io/badge/Docker-blue?logo=docker)](https://www.docker.com/)  
@@ -58,3 +63,7 @@
 
 
 
+=======
+[![AWS ECS](https://img.shields.io/badge/AWS-ECS-232F3E?logo=amazonaws)](https://aws.amazon.com/ecs/)
+…
+>>>>>>> Stashed changes
