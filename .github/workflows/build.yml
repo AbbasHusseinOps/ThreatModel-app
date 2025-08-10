@@ -25,13 +25,15 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build & Tag Docker Image
+        working-directory: app
         run: |
-          REPO=abbas-app
-          TAG=latest
-          REGISTRY=${{ steps.login-ecr.outputs.registry }}
-          IMAGE_URI=$REGISTRY/$REPO:$TAG
-          docker build -t $IMAGE_URI .
-          docker tag    $IMAGE_URI $IMAGE_URI
+        
+           REPO=abbas-app
+           TAG=latest
+           REGISTRY=${{ steps.login-ecr.outputs.registry }}
+           IMAGE_URI=$REGISTRY/$REPO:$TAG
+           docker build -t $IMAGE_URI .
+           docker tag    $IMAGE_URI $IMAGE_URI
 
       - name: Scan with Trivy Action
         uses: aquasecurity/trivy-action@0.32.0
