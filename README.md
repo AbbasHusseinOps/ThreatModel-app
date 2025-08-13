@@ -59,36 +59,41 @@
 ├── .terraform.lock.hcl
 └── README.md
 
-## Local Setup
+## Features 
 
-### 1. Get the Repository
-Clone this project and navigate into its directory:
+Scalability:
+Application deployed on AWS ECS with Fargate, enabling automatic scaling and ensuring high availability.
+
+Security:
+Container images scanned with Trivy to detect and address vulnerabilities.
+Infrastructure tested with Checkov to verify compliance with security and best-practice guidelines.
+
+Production-Readiness:
+HTTPS enabled for secure communication.
+Robust, fault-tolerant infrastructure designed for reliability.
+
+CI/CD Pipeline:
+Fully automated deployment pipeline for efficient integration and continuous delivery.
+
+Modular Terraform:
+Infrastructure as Code implemented with modularised Terraform for clean, reusable, and maintainable configuration.
+
+Multi-Stage Docker Builds:
+Optimised and lightweight container images created via multi-stage builds.
+
+
+## Local Development
+
+### 1. Clone the Repository
+Get a copy of the project and move into its directory:
 ```bash
 git clone https://github.com/AbbasHusseinOps/ThreatModel-app
 cd [repo-directory]
+
+Run Locally 
 
 yarn install
 yarn build
 yarn start
 
-
-GITHUB Action -Build and Push Containerised Image to Amazon ECR
-
-img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/7f84c385-4e90-4547-a344-cad6c0f3ae44" 
-
-GITHUB Actions - Terraform Plan
-
-img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/0d77ce68-2e97-4602-b181-aad18c2f5744" 
-
-GITHUB Actions - Terraform Apply 
-
-img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/bde527ad-18ba-4113-adec-4c7b782eaeb5" 
-
-GITHUB Action - Terraform Destroy 
-
-img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/e3432e1c-d737-43b2-af5e-60b1b29a39e7" 
-
-
-
-
-
+Once running, open your browser and go to http://localhost:3000.
