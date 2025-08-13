@@ -59,41 +59,41 @@
 ├── .terraform.lock.hcl
 └── README.md
 
-## Features 
+## ✨ Features
 
-Scalability:
-Application deployed on AWS ECS with Fargate, enabling automatic scaling and ensuring high availability.
+### 📈 Scalability
+- **AWS ECS with Fargate** — Automatic scaling and high availability.
 
-Security:
-Container images scanned with Trivy to detect and address vulnerabilities.
-Infrastructure tested with Checkov to verify compliance with security and best-practice guidelines.
+### 🔒 Security
+- **Trivy** scans container images for vulnerabilities.
+- **Checkov** validates Terraform for compliance and best practices.
 
-Production-Readiness:
-HTTPS enabled for secure communication.
-Robust, fault-tolerant infrastructure designed for reliability.
+### ⚙️ Production–Readiness
+- **HTTPS** for secure communication.
+- **Robust, fault–tolerant infrastructure** for reliability.
 
-CI/CD Pipeline:
-Fully automated deployment pipeline for efficient integration and continuous delivery.
+### 🔄 CI/CD Pipeline
+- **Fully automated** deployment pipeline for fast, consistent delivery.
 
-Modular Terraform:
-Infrastructure as Code implemented with modularised Terraform for clean, reusable, and maintainable configuration.
+### 🏗 Modular Terraform
+- **Infrastructure as Code** using modularised Terraform for clean, reusable, maintainable setups.
 
-Multi-Stage Docker Builds:
-Optimised and lightweight container images created via multi-stage builds.
+### 📦 Multi–Stage Docker Builds
+- **Optimised & lightweight** images created via multi–stage builds.
 
+---
 
-## Local Development
+## 💻 Local Development
 
-### 1. Clone the Repository
-Get a copy of the project and move into its directory:
+### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/AbbasHusseinOps/ThreatModel-app
 cd [repo-directory]
 
-Run Locally 
+2️⃣ Run Locally
 
 yarn install
 yarn build
 yarn start
 
-Once running, open your browser and go to http://localhost:3000.
+📍 Access locally at http://localhost:3000
