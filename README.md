@@ -59,6 +59,41 @@
 ├── .terraform.lock.hcl
 └── README.md
 
+## Local Setup
+
+### 1. Get the Repository
+
+Clone this project and navigate into its directory:
+```bash
+git clone [https://github.com/AbbasHusseinOps/ThreatModel-app]
+cd [repo-directory]
+
+Install dependencies, build the project, and start the app locally:
+
+yarn install
+yarn build
+yarn start
+
+Once running, open your browser and visit http://localhost:3000 to access the application.
+
+
+
+GITHUB Action -Build and Push Containerised Image to Amazon ECR
+
+<img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/7f84c385-4e90-4547-a344-cad6c0f3ae44" />
+
+GITHUB Actions - Terraform Plan
+
+<img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/0d77ce68-2e97-4602-b181-aad18c2f5744" />
+
+GITHUB Actions - Terraform Apply 
+
+<img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/bde527ad-18ba-4113-adec-4c7b782eaeb5" />
+
+GITHUB Action - Terraform Destroy 
+
+<img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/e3432e1c-d737-43b2-af5e-60b1b29a39e7" />
+
 
 
 
