@@ -1,8 +1,7 @@
 name: Build, Scan & Push to Amazon ECR
 
 on:
-  push:
-    branches: [ main ]
+
   workflow_dispatch:
 
 jobs:
