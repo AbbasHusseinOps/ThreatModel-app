@@ -17,3 +17,7 @@ output "alb_zone_id" {
 output "website_url" {
   value = "https://tmapp.abbashussein.com"
 }
+output "name_servers" {
+  description = "Authoritative NS for the hosted zone"
+  value       = module.route53.name_servers
+}

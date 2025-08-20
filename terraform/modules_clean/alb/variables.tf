@@ -77,4 +77,3 @@ variable "security_group_id" {
   description = "List of security group IDs to attach to the ALB"
   type        =list(string)
 }
-

@@ -57,12 +57,14 @@ variable "ecs_image_url" {
   type    = string
   default = ""
 }
-variable "website_domain" {
-  type    = string
-  default = "tmapp.abbashussein.com"
+variable "domain_name" {
+  type        = string
+  description = "Apex domain, e.g. abbashussein.com"
 }
 
-variable "route53_zone_id" {
-  type    = string
-  default = "Z05102641J2FHMEIIXHR2"
+variable "app_subdomains" {
+  type        = list(string)
+  default     = ["tmapp", "www"]
+  description = "Subdomains that should alias to the ALB"
 }
+

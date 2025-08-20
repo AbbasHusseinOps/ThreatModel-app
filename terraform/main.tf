@@ -10,6 +10,7 @@ module "networking" {
   source              = "./modules_clean/networking"
   vpc_id              = module.vpc.vpc_id
   internet_gateway_id = module.networking.internet_gateway_id
+
 }
 
 module "sgs" {
@@ -27,6 +28,7 @@ module "alb" {
   name_prefix          = var.name_prefix
   allowed_cidr_blocks  = var.alb_allowed_cidr_blocks
   security_group_id   = [ module.sgs.this_sg_id ]
+ 
 }
 
 module "ecs" {
@@ -46,6 +48,12 @@ module "s3" {
 
 module "route53" {
   source                = "./modules_clean/route53"
+   domain_name   = var.domain_name
+  alb_dns_name  = module.alb.alb_dns_name
+  alb_zone_id   = module.alb.alb_zone_id
+
+  create_apex_a = false
+  subdomains    = ["tmapp", "www"]
 }
 
 module "iam" {
@@ -54,6 +62,9 @@ module "iam" {
 
 module "acm" {
   source      = "./modules_clean/acm"
+  domain_name               = "abbashussein.com"
+  subject_alternative_names = ["*.abbashussein.com"]
+  zone_id                   = module.route53.zone_id
 }
 
 

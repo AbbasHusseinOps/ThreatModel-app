@@ -1,14 +1,13 @@
-output "domain_name" {
-  description = "The hosted zone’s domain name"
-  value       = var.domain_name
-}
+output "zone_id"   { value = aws_route53_zone.this.zone_id }
+output "zone_name" { value = aws_route53_zone.this.name }
 
-output "zone_id" {
-  description = "The ID of the existing hosted zone"
-  value       = data.aws_route53_zone.this.zone_id
+output "record_fqdns" {
+  value = concat(
+    var.create_apex_a ? [aws_route53_record.apex[0].fqdn] : [],
+    [for r in aws_route53_record.sub_alias : r.fqdn]
+  )
 }
-
 output "name_servers" {
-  description = "The name servers for DNS delegation"
-  value       = data.aws_route53_zone.this.name_servers
+  value       = aws_route53_zone.this.name_servers
+  description = "Authoritative NS for the hosted zone"
 }
