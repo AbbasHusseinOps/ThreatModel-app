@@ -233,7 +233,8 @@ variable "deployer_policy_document" {
         "route53:ListResourceRecordSets",
         "route53:GetChange",
         "route53:ListTagsForResource",
-        "route53:UpdateHostedZoneComment"
+        "route53:UpdateHostedZoneComment",
+        "route53:GetDNSSEC"
       ],
       "Resource": "*"
     },
@@ -247,6 +248,15 @@ variable "deployer_policy_document" {
         "acm:ListTagsForCertificate",
         "acm:RequestCertificate",
         "acm:DeleteCertificate"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "Route53HostedZoneLifecycle",
+      "Effect": "Allow",
+      "Action": [
+        "route53:CreateHostedZone",
+        "route53:DeleteHostedZone"
       ],
       "Resource": "*"
     }

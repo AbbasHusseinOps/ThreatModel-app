@@ -24,7 +24,7 @@ module "alb" {
   source               = "./modules_clean/alb"
   vpc_id               = module.vpc.vpc_id
   subnet_ids           = module.networking.subnet_ids
-  certificate_arn      = module.acm.certificate_arn
+  certificate_arn      = module.acm.issued_certificate_arn
   name_prefix          = var.name_prefix
   allowed_cidr_blocks  = var.alb_allowed_cidr_blocks
   security_group_id   = [ module.sgs.this_sg_id ]

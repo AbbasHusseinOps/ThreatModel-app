@@ -8,6 +8,7 @@ variable "subnet_ids" {
 
 variable "certificate_arn" {
   type = string
+  default = ""
 }
 
 variable "name_prefix" {
