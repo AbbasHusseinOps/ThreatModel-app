@@ -59,42 +59,42 @@
 ├── .terraform.lock.hcl
 └── README.md
 
- ✨ Features
+ Features
 
-📈 Scalability
+ Scalability
 - **AWS ECS with Fargate** — Automatic scaling and high availability.
 
- 🔒 Security
+  Security
 - **Trivy** scans container images for vulnerabilities.
 - **Checkov** validates Terraform for compliance and best practices.
 
- ⚙️ Production–Readiness
+ ⚙ Production–Readiness
 - **HTTPS** for secure communication.
 - **Robust, fault–tolerant infrastructure** for reliability.
 
- 🔄 CI/CD Pipeline
+  CI/CD Pipeline
 - **Fully automated** deployment pipeline for fast, consistent delivery.
 
- 🏗 Modular Terraform
+  Modular Terraform
 - **Infrastructure as Code** using modularised Terraform for clean, reusable, maintainable setups.
 
- 📦 Multi–Stage Docker Builds
+  Multi–Stage Docker Builds
 - **Optimised & lightweight** images created via multi–stage builds.
 
 ---
 
- 💻 Local Development
+  Local Development
 
-1️⃣ Clone the Repository
+1️ Clone the Repository
 
 ```bash
 git clone https://github.com/AbbasHusseinOps/ThreatModel-app
 cd [repo-directory]
 
-2️⃣ Run Locally
+2️ Run Locally
 
 yarn install
 yarn build
 yarn start
 
-📍 Access locally at http://localhost:3000
+Access locally at http://localhost:3000
